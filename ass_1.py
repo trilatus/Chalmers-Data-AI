@@ -15,18 +15,24 @@ if __name__ == "__main__":
     elder = pd.DataFrame(elder[:].sum(), columns=["sum"])
 
     tot = elder["sum"] + labor["sum"] + child["sum"]
-    index = elder.index #index range of 1860 - 2022
-
+    index = list(elder.index) #index range of 1860 - 2022
+    index = [eval(x) for x in index]
+    axis_intervall = np.arange(1860, 2022, 10)
     tmp = pd.DataFrame(100 * ((elder["sum"] + child["sum"]) / labor["sum"]))
+
+
+
+
+    #Task 1
+    #plt.plot(index, (100 * ((elder["sum"] + child["sum"]) / labor["sum"]))) #Formula used in task 1
+
+    #Task 2
     plt.plot(index, elder/tmp)
     plt.plot(index, child/tmp)
     plt.plot(index, labor/tmp)
-    #elder.index
-    #Think this is task 1 done?
-    #plt.plot(index, (100 * ((elder["sum"] + child["sum"]) / labor["sum"]))) #Formula used in task 1
+    plt.legend(["Elder", "Child", "Labor"])
     plt.xlabel("Year")
-    plt.ylabel("Dependency ratio")
-    
+    plt.ylabel("Fraction of total population")
+    plt.xticks(axis_intervall)
+    plt.xticks(rotation=45, ha='right')
     plt.show()
-
-    #Task 1 works but mby not super optimal
